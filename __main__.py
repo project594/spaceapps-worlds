@@ -2,19 +2,19 @@ print("loading libraries...")
 import math
 import pandas as pd
 import numpy as np
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
 from sklearn.preprocessing import MinMaxScaler
-
 from torch.utils.data import Dataset, DataLoader
-
-epochs = 60000
 
 model = nn.Sequential(nn.Linear(in_features=34, out_features=1), nn.Sigmoid())
 scaler = MinMaxScaler(feature_range=(0, 1))
+
+
+epochs = 2000000
+
 
 def predict(csv_file, model, scaler, X_train_mean, X_train_std, has_labels=True):
     # Load CSV
@@ -40,21 +40,23 @@ def predict(csv_file, model, scaler, X_train_mean, X_train_std, has_labels=True)
     # Predict
     with torch.no_grad():
         probs = model(X_new).numpy().flatten()
-        labels = (probs > 0.8).astype(int)
+        labels = (probs > 0.65).astype(int)
 
     return probs, labels
+
 
 print("loading data...")
 df = pd.read_csv('cumulative_2025.09.29_09.21.24.csv')
 df = df.dropna()
 df = df.apply(pd.to_numeric, errors="coerce").astype("float64")
 df_scaled = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
-
 df_scaled = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
 print(df_scaled)
 
+
 features = df_scaled.drop(['koi_score', 'koi_fpflag_nt', 'koi_fpflag_ss', 'koi_fpflag_co', 'koi_fpflag_ec'], axis=1).values  # X
 labels = df_scaled['koi_score'].values # Y
+
 
 X = torch.tensor(features, dtype = torch.float32)
 y = torch.tensor(labels, dtype = torch.float32)
@@ -62,8 +64,10 @@ y = torch.FloatTensor(y).unsqueeze(-1)
 
 #X = (X - X.mean())/X.std()
 
+
 loss_function = nn.BCELoss() #binary classification loss
 optimizer = optim.SGD(model.parameters(), lr = 0.1)
+
 
 losses = []
 for epoch in range(epochs):
@@ -75,8 +79,8 @@ for epoch in range(epochs):
   optimizer.step()
   print("", end=f"\rtraining...: {math.floor(epoch/epochs * 100)} %")
 
+
 print("\nevaluating...")
 probs, labels = predict("eval.csv", model, scaler, X.mean(), X.std())
-
 print("Probabilities:", probs)
 print("Predicted labels:", labels)
