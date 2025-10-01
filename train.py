@@ -11,10 +11,14 @@ from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import Dataset, DataLoader
 import joblib
 
-epochs = 100000
+epochs = 200000
 
 model = nn.Sequential(
     nn.Linear(34, 64),   # input → hidden
+    nn.ReLU(),
+    nn.Linear(64, 64),   # hidden → hidden
+    nn.ReLU(),
+    nn.Linear(64, 64),   # hidden → hidden
     nn.ReLU(),
     nn.Linear(64, 64),   # hidden → hidden
     nn.ReLU(),
@@ -24,7 +28,7 @@ model = nn.Sequential(
 )
 
 loss_function = nn.BCEWithLogitsLoss()   # expects raw logits
-optimizer = optim.SGD(model.parameters(), lr=0.01)
+optimizer = optim.SGD(model.parameters(), lr=0.004)
 
 print("loading data...")
 
@@ -59,7 +63,7 @@ for epoch in range(epochs):
     losses.append(loss.item())
 
     if (epoch+1) % 10 == 0:
-        print("", end=f"\rtraining...: {math.floor(epoch/epochs * 100)} %")
+        print("", end=f"\rtraining...: {math.floor(epoch/epochs * 100)} %", "Loss: {loss.item():.4f}")
 
 torch.save(model.state_dict(), "model.pth")
 joblib.dump(scaler, "scaler.pkl")
