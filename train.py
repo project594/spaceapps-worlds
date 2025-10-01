@@ -16,6 +16,8 @@ epochs = 100000
 model = nn.Sequential(
     nn.Linear(38, 64),   # input → hidden
     nn.ReLU(),
+    nn.Linear(64, 64),   # hidden → hidden
+    nn.ReLU(),
     nn.Linear(64, 32),   # hidden → hidden
     nn.ReLU(),
     nn.Linear(32, 1)     # hidden → output (no Sigmoid here!)
