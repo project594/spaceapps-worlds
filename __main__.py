@@ -20,8 +20,6 @@ model.load_state_dict(torch.load("model.pth"))
 model.eval()
 
 scaler = joblib.load("scaler.pkl")
-norm = torch.load("norm.pth")
-
 
 df_new = pd.read_csv("eval.csv")
 df_new = df_new.dropna()

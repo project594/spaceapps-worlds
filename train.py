@@ -63,6 +63,5 @@ for epoch in range(epochs):
 
 torch.save(model.state_dict(), "model.pth")
 joblib.dump(scaler, "scaler.pkl")
-torch.save("norm.pth")
 
 print("saved.")
