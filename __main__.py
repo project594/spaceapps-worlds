@@ -21,7 +21,6 @@ model.eval()
 
 scaler = joblib.load("scaler.pkl")
 norm = torch.load("norm.pth")
-X_mean, X_std = norm["mean"], norm["std"]
 
 
 df_new = pd.read_csv("eval.csv")
