@@ -26,7 +26,7 @@ model = nn.Sequential(
 )
 
 loss_function = nn.BCEWithLogitsLoss()   # expects raw logits
-optimizer = optim.SGD(model.parameters(), lr=0.01)
+optimizer = optim.SGD(model.parameters(), lr=0.006)
 
 print("loading data...")
 
