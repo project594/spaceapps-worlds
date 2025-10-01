@@ -11,8 +11,8 @@ from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import Dataset, DataLoader
 import joblib
 
-epochs = input("epochs: ")
-lr_u = input("lr: " )
+epochs = int(input("epochs: "))
+lr_u = float(input("lr: " ))
 
 model = nn.Sequential(
     nn.Linear(34, 64),   # input → hidden
