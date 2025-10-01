@@ -6,7 +6,7 @@ import joblib
 
 
 model = nn.Sequential(
-    nn.Linear(38, 64),
+    nn.Linear(34, 64),
     nn.ReLU(),
     nn.Linear(64, 64),
     nn.ReLU(),
@@ -29,7 +29,7 @@ df_new = df_new.dropna()
 df_new = df_new.apply(pd.to_numeric, errors="coerce").astype("float64")
 
 df_new_scaled = pd.DataFrame(scaler.transform(df_new), columns=df_new.columns)
-X_new = df_new_scaled.drop("koi_score", axis=1).values
+X_new = df_new_scaled.drop(['koi_score', 'koi_fpflag_nt', 'koi_fpflag_ss', 'koi_fpflag_co', 'koi_fpflag_ec'], axis=1).values
 X_new = torch.tensor(X_new, dtype=torch.float32)
 
 # Standardize with training mean/std
