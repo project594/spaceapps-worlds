@@ -6,13 +6,15 @@ import joblib
 
 
 model = nn.Sequential(
-    nn.Linear(34, 64),
+    nn.Linear(34, 64),   # input → hidden
     nn.ReLU(),
-    nn.Linear(64, 64),
+    nn.Linear(64, 64),   # hidden → hidden
     nn.ReLU(),
-    nn.Linear(64, 32),
+    nn.Linear(64, 64),   # hidden → hidden
     nn.ReLU(),
-    nn.Linear(32, 1)
+    nn.Linear(64, 32),   # hidden → hidden
+    nn.ReLU(),
+    nn.Linear(32, 1)     # hidden → output (no Sigmoid here!)
 )
 
 print("loading model...")
