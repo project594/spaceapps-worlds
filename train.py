@@ -26,15 +26,13 @@ model = nn.Sequential(
     nn.ReLU(),
     nn.Linear(64, 64),   # hidden → hidden
     nn.ReLU(),
-    nn.Linear(64, 64),   # hidden → hidden
-    nn.ReLU(),
     nn.Linear(64, 32),   # hidden → hidden
     nn.ReLU(),
     nn.Linear(32, 1)     # hidden → output (no Sigmoid here!)
 )
 
 loss_function = nn.BCEWithLogitsLoss()   # expects raw logits
-optimizer = optim.SGD(model.parameters(), lr=0.001)
+optimizer = optim.SGD(model.parameters(), lr=0.004)
 
 print("loading data...")
 
