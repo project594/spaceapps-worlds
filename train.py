@@ -63,7 +63,7 @@ for epoch in range(epochs):
     losses.append(loss.item())
 
     if (epoch+1) % 10 == 0:
-        print("", end=f"\rtraining...: {math.floor(epoch/epochs * 100)} %", "Loss: {loss.item():.4f}")
+        print("", end=f"\rtraining...: {math.floor(epoch/epochs * 100)} %, Loss: {loss.item():.4f}")
 
 torch.save(model.state_dict(), "model.pth")
 joblib.dump(scaler, "scaler.pkl")
