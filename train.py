@@ -18,7 +18,7 @@ model = nn.Sequential(
     nn.ReLU(),
     nn.Linear(64, 64),   # hidden → hidden
     nn.ReLU(),
-    nn.Linear(64, 32),   # hidden → hidden
+    nn.Linear(64, 64),   # hidden → hidden
     nn.ReLU(),
     nn.Linear(64, 32),   # hidden → hidden
     nn.ReLU(),
