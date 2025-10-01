@@ -46,7 +46,7 @@ labels = df_scaled['koi_score'].values
 X = torch.tensor(features, dtype=torch.float32)
 y = torch.tensor(labels, dtype=torch.float32).unsqueeze(-1)
 
-X_mean, X_std = X.mean(), X.std()
+#X_mean, X_std = X.mean(), X.std()
 
 
 losses = []
