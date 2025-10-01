@@ -36,7 +36,7 @@ df = df.apply(pd.to_numeric, errors="coerce").astype("float64")
 
 df_scaled = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
 
-features = df_scaled.drop(['koi_score', 'koi_fpflag_nt', 'koi_fpflag_ss', 'koi_fpfkag_co', 'koi_fpflag_ec'], axis=1).values
+features = df_scaled.drop(['koi_score', 'koi_fpflag_nt', 'koi_fpflag_ss', 'koi_fpflag_co', 'koi_fpflag_ec'], axis=1).values
 labels = df_scaled['koi_score'].values
 
 X = torch.tensor(features, dtype=torch.float32)
