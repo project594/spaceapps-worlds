@@ -7,6 +7,8 @@ import joblib
 model = nn.Sequential(
     nn.Linear(38, 64),
     nn.ReLU(),
+    nn.Linear(64, 64),
+    nn.ReLU(),
     nn.Linear(64, 32),
     nn.ReLU(),
     nn.Linear(32, 1)
