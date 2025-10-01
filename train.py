@@ -12,7 +12,7 @@ from torch.utils.data import Dataset, DataLoader
 import joblib
 
 epochs = input("epochs: ")
-lr_u = input("lr": )
+lr_u = input("lr: " )
 
 model = nn.Sequential(
     nn.Linear(34, 64),   # input → hidden
