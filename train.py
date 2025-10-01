@@ -11,7 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import Dataset, DataLoader
 import joblib
 
-epochs = 300000
+epochs = 20000
 
 model = nn.Sequential(
     nn.Linear(34, 64),   # input → hidden
@@ -26,7 +26,7 @@ model = nn.Sequential(
 )
 
 loss_function = nn.BCEWithLogitsLoss()   # expects raw logits
-optimizer = optim.Adam(model.parameters(), lr=0.004)
+optimizer = optim.Adam(model.parameters(), lr=0.003)
 
 print("loading data...")
 
