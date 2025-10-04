@@ -18,7 +18,7 @@ model = nn.Sequential(
 )
 
 print("loading model...")
-model.load_state_dict(torch.load("model_Kepler_14g.pth"))
+model.load_state_dict(torch.load("model.pth"))
 model.eval()
 
 scaler = joblib.load("scaler.pkl")
